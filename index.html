@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <!-- PWA / Web App essentials -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -31,9 +31,13 @@ const blob = new Blob([JSON.stringify(manifestData)], {type:'application/json'})
 const manifestURL = URL.createObjectURL(blob);
 document.write('<link rel="manifest" href="' + manifestURL + '"/>');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/></noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/></noscript>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
 <style>
 :root {
   --lime:#C8F135; --coral:#FF5C5C; --sky:#5CE1FF; --violet:#A259FF; --orange:#FF8C42;
@@ -472,7 +476,7 @@ button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 /* Smooth reveal */
 @keyframes appFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
-body{animation:appFadeIn .3s ease both;}
+
 
 /* ══════════════════════════════════════════
    MOBILE-FIRST RESPONSIVE — ≤768px
@@ -826,7 +830,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
       <div class="auth-field">
         <label class="auth-label">University Email</label>
         <div class="auth-input-wrap">
-          <input class="auth-input" id="login-email" type="email" placeholder="you@university.edu or you@gmail.com" autocomplete="email"/>
+          <input class="auth-input" id="login-email" aria-label="University email" type="email" placeholder="you@university.edu or you@gmail.com" autocomplete="email"/>
           <span class="auth-input-icon">✉️</span>
         </div>
       </div>
@@ -837,13 +841,13 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
           <button class="auth-link" onclick="showForgotPassword()" style="font-size:.72rem">Forgot password?</button>
         </label>
         <div class="auth-input-wrap">
-          <input class="auth-input" id="login-password" type="password" placeholder="Enter your password" autocomplete="current-password" style="padding-right:2.75rem"/>
+          <input class="auth-input" id="login-password" aria-label="Password" type="password" placeholder="Enter your password" autocomplete="current-password" style="padding-right:2.75rem"/>
           <span class="auth-input-icon" onclick="togglePw('login-password',this)">👁</span>
         </div>
       </div>
 
       <div style="display:flex;align-items:center;gap:.5rem;margin-top:-.25rem">
-        <input type="checkbox" id="remember-me" style="accent-color:var(--lime);width:15px;height:15px;cursor:pointer"/>
+        <input type="checkbox" id="remember-me" aria-label="Remember me" style="accent-color:var(--lime);width:15px;height:15px;cursor:pointer"/>
         <label for="remember-me" style="font-size:.78rem;color:var(--muted);cursor:pointer;user-select:none">Remember me</label>
       </div>
 
@@ -880,25 +884,25 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
         <div class="auth-field" style="margin-bottom:0">
           <label class="auth-label">First Name</label>
-          <input class="auth-input" id="signup-fname" type="text" placeholder="Alex" autocomplete="given-name"/>
+          <input class="auth-input" id="signup-fname" aria-label="First name" type="text" placeholder="Alex" autocomplete="given-name"/>
         </div>
         <div class="auth-field" style="margin-bottom:0">
           <label class="auth-label">Last Name</label>
-          <input class="auth-input" id="signup-lname" type="text" placeholder="Khan" autocomplete="family-name"/>
+          <input class="auth-input" id="signup-lname" aria-label="Last name" type="text" placeholder="Khan" autocomplete="family-name"/>
         </div>
       </div>
 
       <div class="auth-field" style="margin-top:1rem">
         <label class="auth-label">University Email</label>
         <div class="auth-input-wrap">
-          <input class="auth-input" id="signup-email" type="email" placeholder="you@university.edu or you@gmail.com" autocomplete="email" oninput="validateEmail(this)"/>
+          <input class="auth-input" id="signup-email" aria-label="University email" type="email" placeholder="you@university.edu or you@gmail.com" autocomplete="email" oninput="validateEmail(this)"/>
           <span class="auth-input-icon" id="email-check"></span>
         </div>
       </div>
 
       <div class="auth-field">
         <label class="auth-label">Department</label>
-        <select class="auth-input" id="signup-dept" style="cursor:pointer">
+        <select class="auth-input" id="signup-dept" aria-label="Department" style="cursor:pointer">
           <option value="" disabled selected>Select your department</option>
           <option>Computer Science</option>
           <option>Information Technology</option>
@@ -913,7 +917,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
 
       <div class="auth-field">
         <label class="auth-label">Year of Study</label>
-        <select class="auth-input" id="signup-year" style="cursor:pointer">
+        <select class="auth-input" id="signup-year" aria-label="Year of study" style="cursor:pointer">
           <option value="" disabled selected>Select year</option>
           <option>Year 1</option><option>Year 2</option>
           <option>Year 3</option><option>Year 4</option><option>Postgraduate</option>
@@ -923,7 +927,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
       <div class="auth-field">
         <label class="auth-label">Password</label>
         <div class="auth-input-wrap">
-          <input class="auth-input" id="signup-password" type="password" placeholder="Create a strong password" autocomplete="new-password" oninput="checkPasswordStrength(this.value)" style="padding-right:2.75rem"/>
+          <input class="auth-input" id="signup-password" aria-label="Create a password" type="password" placeholder="Create a strong password" autocomplete="new-password" oninput="checkPasswordStrength(this.value)" style="padding-right:2.75rem"/>
           <span class="auth-input-icon" onclick="togglePw('signup-password',this)">👁</span>
         </div>
         <div class="pw-strength"><div class="pw-strength-bar" id="pw-bar"></div></div>
@@ -943,7 +947,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
       </div>
 
       <div style="display:flex;align-items:flex-start;gap:.5rem;margin-top:-.25rem">
-        <input type="checkbox" id="agree-terms" style="accent-color:var(--lime);width:15px;height:15px;cursor:pointer;margin-top:2px;flex-shrink:0"/>
+        <input type="checkbox" id="agree-terms" aria-label="I agree to the terms" style="accent-color:var(--lime);width:15px;height:15px;cursor:pointer;margin-top:2px;flex-shrink:0"/>
         <label for="agree-terms" style="font-size:.76rem;color:var(--muted);cursor:pointer;line-height:1.5;user-select:none">
           I agree to the <button class="auth-link" style="font-size:.76rem">Terms of Service</button> and <button class="auth-link" style="font-size:.76rem">Privacy Policy</button>
         </label>
@@ -1064,7 +1068,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
   </div>
   <div class="search-wrap" id="search-wrap">
     <span class="search-icon">🔍</span>
-    <input class="search-input" id="search-input" type="text" placeholder="Search groups, events, items..." oninput="handleSearch(this.value)" onfocus="openSearch()"/>
+    <input class="search-input" id="search-input" type="text" aria-label="Search groups, events and items" placeholder="Search groups, events, items..." oninput="handleSearch(this.value)" onfocus="openSearch()"/>
     <div class="search-dropdown" id="search-dropdown"></div>
   </div>
   <div class="nav-tabs">
@@ -1077,7 +1081,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
   </div>
   <div class="nav-right">
     <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle" title="Toggle theme">🌙</button>
-    <div class="notif-btn" onclick="toggleNotifPanel(event)" title="Notifications">🔔<div class="notif-dot" id="notif-dot"></div></div>
+    <div class="notif-btn" role="button" tabindex="0" aria-label="Notifications" onclick="toggleNotifPanel(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNotifPanel(event)}" title="Notifications">🔔<div class="notif-dot" id="notif-dot"></div></div>
     <!-- Guest: show Sign In / Sign Up buttons -->
     <div class="guest-bar" id="guest-bar">
       <button class="btn-signin" onclick="openAuth('login')">Sign In</button>
@@ -1085,7 +1089,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     </div>
     <!-- Logged in: show avatar -->
     <button class="avatar" id="nav-avatar" onclick="switchTab('profile')" title="My Profile" style="display:none;transition:box-shadow .2s,transform .2s;position:relative;cursor:pointer;border:none;">AK</button>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -1578,7 +1582,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
   <div id="gcal-banner" style="display:none;background:rgba(200,241,53,0.08);border:1px solid rgba(200,241,53,0.25);border-radius:14px;padding:.85rem 1.1rem;margin-bottom:1.25rem;align-items:center;gap:.75rem;font-size:.83rem">
     <span style="font-size:1.2rem">📅</span>
     <div style="flex:1"><strong>Google Calendar connected!</strong> Showing your real events below.</div>
-    <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem">✕</button>
+    <button aria-label="Close" onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem">✕</button>
   </div>
 
   <!-- CALENDAR MONTH VIEW -->
@@ -1586,9 +1590,9 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
       <!-- Month header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border)">
-        <button onclick="prevMonth()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:1.1rem;padding:.25rem .5rem;border-radius:8px" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='none'">‹</button>
+        <button aria-label="Previous month" onclick="prevMonth()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:1.1rem;padding:.25rem .5rem;border-radius:8px" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='none'">‹</button>
         <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem" id="cal-month-label">March 2026</div>
-        <button onclick="nextMonth()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:1.1rem;padding:.25rem .5rem;border-radius:8px" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='none'">›</button>
+        <button aria-label="Next month" onclick="nextMonth()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:1.1rem;padding:.25rem .5rem;border-radius:8px" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='none'">›</button>
       </div>
       <!-- Day labels -->
       <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;padding:.5rem 0;border-bottom:1px solid var(--border)">
@@ -1654,8 +1658,8 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
         <div class="msg"><div class="msg-avatar" style="background:linear-gradient(135deg,#5CE1FF,#C8F135)">MT</div><div><div class="msg-name">Mark T.</div><div class="msg-bubble">Nice! Don't forget there's free pizza at 1PM 🍕🍕</div><div class="msg-time">10:29 AM</div></div></div>
       </div>
       <div class="chat-input-row">
-        <input class="chat-input" id="chat-input" type="text" placeholder="Message #general..." onkeydown="sendMessage(event)"/>
-        <button class="send-btn" onclick="sendMsg()">➤</button>
+        <input class="chat-input" id="chat-input" type="text" aria-label="Type a message" placeholder="Message #general..." onkeydown="sendMessage(event)"/>
+        <button class="send-btn" onclick="sendMsg()" aria-label="Send message">➤</button>
       </div>
     </div>
   </div>
@@ -1866,7 +1870,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     <div style="font-size:.73rem;color:var(--muted);margin-top:.1rem">Add to home screen for the full app experience</div>
   </div>
   <button onclick="installApp()" style="background:var(--lime);color:var(--dark);border:none;border-radius:50px;padding:.4rem .9rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap">Install</button>
-  <button onclick="dismissInstall()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:.2rem">✕</button>
+  <button aria-label="Dismiss install banner" onclick="dismissInstall()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:.2rem">✕</button>
 </div>
 
 <!-- BOTTOM NAV (mobile) -->
@@ -2572,7 +2576,7 @@ function showToast(title,body,type='lime'){
   const el=document.createElement('div');
   el.className=`toast${type==='coral'?' coral':type==='sky'?' sky':''}`;
   el.id=id;
-  el.innerHTML=`<div class="toast-icon">${icons[type]||'✅'}</div><div><div class="toast-title">${title}</div><div class="toast-body">${body}</div></div><button class="toast-close" onclick="document.getElementById('${id}').remove()">✕</button>`;
+  el.innerHTML=`<div class="toast-icon">${icons[type]||'✅'}</div><div><div class="toast-title">${title}</div><div class="toast-body">${body}</div></div><button class="toast-close" aria-label="Close notification" onclick="document.getElementById('${id}').remove()">✕</button>`;
   c.appendChild(el);
   setTimeout(()=>el&&el.remove(),4000);
 }
