@@ -35,9 +35,6 @@ document.write('<link rel="manifest" href="' + manifestURL + '"/>');
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/></noscript>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'"/>
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/></noscript>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
 <style>
 :root {
   --lime:#C8F135; --coral:#FF5C5C; --sky:#5CE1FF; --violet:#A259FF; --orange:#FF8C42;
@@ -179,7 +176,7 @@ body.light .btn-signin{border-color:var(--border);}
 
 /* HERO */
 .hero{padding:3rem 2rem 2rem;position:relative;z-index:1;max-width:1200px;margin:0 auto;}
-.hero-blob{position:absolute;top:-60px;right:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,0.15),transparent 70%);filter:blur(40px);pointer-events:none;}
+.hero-blob{position:absolute;top:-60px;right:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,0.15),transparent 70%);pointer-events:none;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(200,241,53,0.1);border:1px solid rgba(200,241,53,0.3);color:var(--lime);font-size:.78rem;font-weight:600;padding:.3rem .8rem;border-radius:50px;margin-bottom:1rem;animation:fadeUp .5s ease both;}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;animation:fadeUp .5s .1s ease both;}
 .hero h1 em{font-style:normal;color:var(--lime);}
@@ -2329,8 +2326,29 @@ let carpoolMarkers = [];
 let activeRideId = null;
 let currentFilter = 'all';
 
+// ─── Load Leaflet only when a map is opened (keeps first load fast) ───
+let _leafletPromise = null;
+function loadLeaflet() {
+  if (window.L) return Promise.resolve();
+  if (_leafletPromise) return _leafletPromise;
+  _leafletPromise = new Promise((resolve, reject) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+    const cssDone = new Promise(r => { css.onload = r; css.onerror = r; });
+    document.head.appendChild(css);
+    const js = document.createElement('script');
+    js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    js.onload = () => cssDone.then(resolve);
+    js.onerror = () => { _leafletPromise = null; reject(new Error('Map library failed to load')); };
+    document.head.appendChild(js);
+  });
+  return _leafletPromise;
+}
+
 function initCarpoolMap() {
   if (carpoolMap) return;
+  if (typeof L === 'undefined') { loadLeaflet().then(initCarpoolMap).catch(console.error); return; }
   setTimeout(() => {
     carpoolMap = L.map('carpool-map', {zoomControl: true}).setView([51.505, -0.095], 14);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -2793,6 +2811,7 @@ const lfMapItems=[
 
 function initLFMap(){
   if(lfMap) return;
+  if(typeof L==='undefined'){ loadLeaflet().then(initLFMap).catch(console.error); return; }
   setTimeout(()=>{
     lfMap=L.map('lf-map').setView([51.505,-0.090],16);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(lfMap);
