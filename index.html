@@ -7,15 +7,15 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="CampusHub"/>
+<meta name="apple-mobile-web-app-title" content="UniLoop"/>
 <meta name="theme-color" content="#0F0F14" id="theme-color-meta"/>
 <meta name="description" content="Your campus life, all in one place — study groups, carpool, lost & found, events and chat."/>
-<title>CampusHub 🎓</title>
+<title>UniLoop 🎓</title>
 <!-- PWA manifest inline -->
 <script>
 const manifestData = {
-  name: "CampusHub",
-  short_name: "CampusHub",
+  name: "UniLoop",
+  short_name: "UniLoop",
   description: "Your campus life hub",
   start_url: "./",
   display: "standalone",
@@ -184,6 +184,7 @@ body.light .btn-signin{border-color:var(--border);}
 .stats-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;animation:fadeUp .5s .3s ease both;}
 .stat-chip{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:50px;padding:.5rem 1rem;font-size:.82rem;display:flex;align-items:center;gap:.4rem;}
 .stat-chip strong{color:var(--lime);font-family:'Syne',sans-serif;}
+.demo-note{font-size:.74rem;color:var(--muted);margin-top:.7rem;}
 
 /* STICKY STATS BAR — appears when hero scrolls out of view */
 #sticky-bar{
@@ -811,7 +812,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
         <circle cx="20" cy="20" r="3.5" fill="#C8F135"/>
         <circle cx="20" cy="20" r="1.5" fill="#0F0F14"/>
       </svg>
-      <div class="auth-logo-text">Campus<span>Hub</span></div>
+      <div class="auth-logo-text">Uni<span>Loop</span></div>
     </div>
 
     <!-- Tabs -->
@@ -982,7 +983,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
 <!-- GATE BANNER — shown when guest tries a locked action -->
 <div id="gate-banner">
   <div class="gate-banner-text" id="gate-banner-text">
-    <strong>Join CampusHub</strong> to post, join groups, and connect with students.
+    <strong>Join UniLoop</strong> to post, join groups, and connect with students.
   </div>
   <div class="gate-banner-actions">
     <button class="btn-signin" onclick="dismissGate()" style="padding:.38rem .8rem;font-size:.78rem">Later</button>
@@ -1060,7 +1061,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
       </defs>
     </svg>
     <div class="nav-logo-text">
-      <span class="logo-main">Campus<span>Hub</span></span>
+      <span class="logo-main">Uni<span>Loop</span></span>
     </div>
   </div>
   <div class="search-wrap" id="search-wrap">
@@ -1138,6 +1139,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     <div class="stat-chip">🚗 <strong id="stat-rides">34</strong> rides available</div>
     <div class="stat-chip">🗓 <strong id="stat-events">12</strong> events this week</div>
   </div>
+  <p class="demo-note">Demo preview: the numbers above are sample data, not live counts.</p>
 </div>
 
 <!-- STICKY STATS BAR -->
@@ -1145,7 +1147,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
   <div class="sticky-bar-inner">
     <span class="sticky-section-label" id="sticky-section-name">📚 Study Groups</span>
     <div class="sticky-divider"></div>
-    <div class="sticky-stat">👥 <strong id="sb-students">1,240</strong> <span>online</span></div>
+    <div class="sticky-stat" title="Demo data">👥 <strong id="sb-students">1,240</strong> <span>online</span></div>
     <div class="sticky-divider"></div>
     <div class="sticky-stat">📚 <strong id="sb-groups">86</strong> <span>groups</span></div>
     <div class="sticky-divider"></div>
@@ -1842,7 +1844,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     <div class="settings-section-title">🗑️ Account</div>
     <div class="settings-row"><div><div class="settings-label">Clear Notification History</div><div class="settings-sub">Remove all past notifications</div></div><button class="btn btn-ghost" style="font-size:.8rem" onclick="clearNotifs()">Clear All</button></div>
     <div class="settings-row"><div><div class="settings-label">Export My Data</div><div class="settings-sub">Download your campus activity data</div></div><button class="btn btn-ghost" style="font-size:.8rem" onclick="showToast('Export Started','Your data will be emailed to you.','lime')">Export</button></div>
-    <div class="settings-row"><div><div class="settings-label" style="color:var(--coral)">Sign Out</div><div class="settings-sub">Sign out of CampusHub</div></div><button class="btn btn-ghost" style="font-size:.8rem;border-color:rgba(255,92,92,0.3);color:var(--coral)" onclick="realSignOut()">Sign Out</button></div>
+    <div class="settings-row"><div><div class="settings-label" style="color:var(--coral)">Sign Out</div><div class="settings-sub">Sign out of UniLoop</div></div><button class="btn btn-ghost" style="font-size:.8rem;border-color:rgba(255,92,92,0.3);color:var(--coral)" onclick="realSignOut()">Sign Out</button></div>
   </div>
 </div>
 
@@ -1863,7 +1865,7 @@ body.light .auth-social-btn:hover{background:rgba(0,0,0,.08);}
     <circle cx="20" cy="20" r="1.5" fill="#0F0F14"/>
   </svg>
   <div style="flex:1">
-    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem">Install CampusHub</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem">Install UniLoop</div>
     <div style="font-size:.73rem;color:var(--muted);margin-top:.1rem">Add to home screen for the full app experience</div>
   </div>
   <button onclick="installApp()" style="background:var(--lime);color:var(--dark);border:none;border-radius:50px;padding:.4rem .9rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap">Install</button>
@@ -2142,7 +2144,7 @@ function switchTab(tab) {
       study:'📚 Study Groups', carpool:'🚗 Carpool', lostfound:'🔍 Lost & Found',
       events:'🗓 Events', chat:'💬 Chat', profile:'👤 Profile', settings:'⚙️ Settings',
     };
-    stickyLabel.textContent = sectionLabels[tab] || '🎓 CampusHub';
+    stickyLabel.textContent = sectionLabels[tab] || '🎓 UniLoop';
   }
   // scroll to top on tab change
   window.scrollTo({top:0, behavior:'smooth'});
@@ -2866,7 +2868,7 @@ function dismissInstall() {
 }
 window.addEventListener('appinstalled', () => {
   document.getElementById('install-banner').style.display = 'none';
-  showToast('App Installed! 🎉', 'CampusHub is now on your home screen.', 'lime');
+  showToast('App Installed! 🎉', 'UniLoop is now on your home screen.', 'lime');
 });
 
 // ─── PWA: THEME COLOR SYNC ───
@@ -2991,8 +2993,8 @@ function requireAuth(actionKey, tab) {
     post:   '✏️ <strong>Create an account</strong> to post items and share with your campus.',
     ride:   '🚗 <strong>Sign up</strong> to request rides and connect with drivers.',
     event:  '🗓 <strong>Sign up</strong> to RSVP to events and get reminders.',
-    chat:   '💬 <strong>Join CampusHub</strong> to send messages and join chat rooms.',
-    default:'🎓 <strong>Sign up free</strong> to unlock all CampusHub features.',
+    chat:   '💬 <strong>Join UniLoop</strong> to send messages and join chat rooms.',
+    default:'🎓 <strong>Sign up free</strong> to unlock all UniLoop features.',
   };
   document.getElementById('gate-banner-text').innerHTML = msgs[actionKey] || msgs.default;
   const banner = document.getElementById('gate-banner');
@@ -3204,7 +3206,7 @@ async function handleSignup() {
       id: u.id,
     };
     localStorage.setItem('campushub-user', JSON.stringify(newUser));
-    showAuthMsg('signup-msg','success','Account created! Welcome to CampusHub 🎉');
+    showAuthMsg('signup-msg','success','Account created! Welcome to UniLoop 🎉');
     setTimeout(() => { enterApp(newUser); initSocket(); }, 900);
   } catch(err) {
     setAuthLoading('signup-btn','signup-btn-text', false, 'Create Account →');
@@ -3257,7 +3259,7 @@ function enterApp(user) {
   updateNavForAuthState();
   closeAuth();
   setTimeout(() => {
-    showToast('Welcome, ' + user.name.split(' ')[0] + '! 👋', 'Great to have you on CampusHub.', 'lime');
+    showToast('Welcome, ' + user.name.split(' ')[0] + '! 👋', 'Great to have you on UniLoop.', 'lime');
     setTimeout(() => showToast('💬 3 new messages', 'Sara replied in #ai-machine-learning', 'sky'), 1200);
   }, 400);
 }
@@ -3335,7 +3337,7 @@ async function realSignOut() {
 
 
 // ═══════════════════════════════════════════════════════════════
-//  BACKEND INTEGRATION — CampusHub API Client + Socket.io
+//  BACKEND INTEGRATION — UniLoop API Client + Socket.io
 // ═══════════════════════════════════════════════════════════════
 
 const API_BASE = 'http://localhost:5000/api';
